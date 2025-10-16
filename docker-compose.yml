@@ -3,9 +3,10 @@ services:
     build: ./backend
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: ["./entrypoint.sh", "python", "manage.py", "runserver", "0.0.0.0:8000"]
     volumes:
       - ./backend:/app
+      - ./backend/media:/app/media
     ports:
       - "8001:8000"
     env_file:
