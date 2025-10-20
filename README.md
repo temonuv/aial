@@ -24,6 +24,11 @@ newgrp docker
 ```
 # set up .env file
 docker compose down
-
 docker compose up -d --build
+
+# access backend on 
+http://localhost:8010/api/
+
+# server link
+http://51.83.132.17:8010/api/
 ```
