@@ -8,7 +8,7 @@ services:
       - ./backend:/app
       - ./backend/media:/app/media
     ports:
-      - "8010:8000"
+      - "127.0.0.1:8010:8000"  # Bind to localhost only
     env_file:
       - .env
     depends_on:
@@ -25,7 +25,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5434:5432"
+      - "127.0.0.1:5434:5432"  # Bind to localhost if you need host access; otherwise remove
 
   frontend:
     build:
@@ -35,7 +35,7 @@ services:
       - ./frontend:/app
       - /app/node_modules
     ports:
-      - "3001:3000"
+      - "127.0.0.1:3001:3000"  # Bind to localhost only
     environment:
       NODE_ENV: development
     depends_on:
