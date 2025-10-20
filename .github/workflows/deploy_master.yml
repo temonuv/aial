@@ -47,31 +47,17 @@ jobs:
     # change to configure_env if it will be added
     needs: pull_master_branch
     steps:
-      - name: Run Docker Compose
-        working-directory: ./aial
-        env:
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-        run: docker compose up -d --build
-
-#      - name: Update and restart aial app
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.HOST }}
-#          username: ubuntu
-#          port: ${{ secrets.PORT }}
-#          password: ${{ secrets.PASSWORD }}
-#          script: |
-#            cd /home/ubuntu/apps/aial
-#
-#            sudo supervisorctl stop aial || true
-#            docker compose down
-#            docker compose up -d --build
-#
-#            sudo supervisorctl start aial || exit 1
-#            sudo supervisorctl start aial-celery || true
-#            sudo supervisorctl start aial-celery-beat || true
+      - name: Update and restart aial app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ubuntu
+          port: ${{ secrets.PORT }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            cd /home/ubuntu/apps/aial
+            docker compose down
+            docker compose up -d --build
 
 #  check_if_site_is_running:
 #    runs-on: ubuntu-latest
