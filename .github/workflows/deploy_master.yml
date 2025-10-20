@@ -22,7 +22,7 @@ jobs:
 
             git fetch origin
             git checkout master || exit 1
-            git pull origin master --force || exit 1
+            git pull origin master || exit 1
 
 #  configure_env:
 #    runs-on: ubuntu-latest
