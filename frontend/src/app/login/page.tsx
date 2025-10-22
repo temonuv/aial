@@ -24,7 +24,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8010/api/token/", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/token/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -22,7 +22,8 @@ newgrp docker
 
 ## Bring your project up
 ```
-# set up .env file
+# set up .env file in root direcotry
+# set up .env file in frontend direcotry
 docker compose down
 docker compose up -d --build
 
