@@ -3,7 +3,7 @@ services:
     build: ./backend
     environment:
       DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
-    command: ["./entrypoint.sh", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: ["./entrypoint.sh",]
     volumes:
       - ./backend:/app
       - ./backend/media:/app/media

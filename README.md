@@ -32,3 +32,11 @@ http://localhost:8010/api/
 # server link
 http://51.83.132.17:8010/api/
 ```
+
+## create superuser
+```
+docker compose exec backend bash
+python manage.py createsuperuser
+# set up
+exit
+```

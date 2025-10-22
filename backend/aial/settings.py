@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     "rest_framework",
     'drf_yasg',
     "corsheaders",
+
     'core',
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -55,6 +57,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://51.83.132.17",
 ]
 
 ROOT_URLCONF = 'aial.urls'
@@ -124,8 +132,6 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MIDDLEWARE.insert(0, "corsheaders.middleware.CorsMiddleware")
-
 CORS_ALLOW_ALL_ORIGINS = True
 
 MEDIA_URL = '/media/'
@@ -136,5 +142,16 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+}
+
+AUTH_USER_MODEL = "users.User"
+
+SIMPLE_JWT = {
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_OBTAIN_SERIALIZER': 'users.serializers.EmailTokenObtainPairSerializer',
 }

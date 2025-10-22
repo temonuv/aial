@@ -1,5 +1,14 @@
 #!/bin/bash
-python3 manage.py collectstatic --noinput
-python3 manage.py makemigrations --noinput
-python3 manage.py migrate --noinput
+set -e
+
+echo "🚀 Running migrations..."
+python manage.py makemigrations --noinput
+python manage.py migrate --noinput
+
+echo "🚀 Collecting static files..."
+python manage.py collectstatic --noinput
+
+echo "✅ Starting server..."
+python manage.py runserver 0.0.0.0:8000
+
 exec "$@"
