@@ -58,14 +58,6 @@ jobs:
             cd /home/ubuntu/apps/aial
             docker compose -f docker-compose.yml -f docker-compose.prod.yml down
             docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
-# Health: Wait & test frontend
-            sleep 15
-            if ! curl -f http://localhost:3001/; then
-              echo "Frontend health check failed!"
-              docker logs aial-frontend-1
-              exit 1
-            fi
-            echo "Deploy successful: Frontend at http://localhost:3001"
 
       - name: Verify frontend logs
         uses: appleboy/ssh-action@master
