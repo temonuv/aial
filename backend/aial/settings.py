@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-v=i8^%&j-b_-2=tr=sz8s)5bg1o=+za(=4zax5^%5e8vc^io$k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEBUG", True),
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '51.83.132.17']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'dobrydealer.pl']
 
 
 # Application definition
@@ -62,7 +62,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://51.83.132.17",
+    "https://dobrydealer.pl",
 ]
 
 ROOT_URLCONF = 'aial.urls'

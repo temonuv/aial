@@ -2,7 +2,7 @@ services:
   backend:
     build: ./backend
     environment:
-      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
     command: ["./entrypoint.sh",]
     volumes:
       - ./backend:/app
@@ -31,13 +31,17 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      # Pass arg: Prod builds with NODE_ENV=production
+      args:
+        - NODE_ENV=${NODE_ENV:-development}
     volumes:
+      # Dev-only: Hot-reload source (skipped in prod via override)
       - ./frontend:/app
-      - /app/node_modules
+      - /app/node_modules  # Always: Isolate deps
     ports:
       - "127.0.0.1:3001:3000"  # Bind to localhost only
     environment:
-      NODE_ENV: development
+      NODE_ENV: ${NODE_ENV:-development}  # Default dev; set to 'production' via .env or deploy
     depends_on:
       - backend
 

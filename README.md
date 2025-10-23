@@ -21,23 +21,29 @@ newgrp docker
 ```
 
 ## Bring your project up
+set up .env file in root direcotry
+
+set up .env file in frontend direcotry
+
+next:
 ```
-# set up .env file in root direcotry
-# set up .env file in frontend direcotry
 docker compose down
-docker compose up -d --build
+docker compose up --build
 
 # access backend on 
 http://localhost:8010/api/
 
 # server link
-http://51.83.132.17:8010/api/
+https://dobrydealer.pl
 ```
 
 ## create superuser
+in different terminal in root of aial project
 ```
 docker compose exec backend bash
 python manage.py createsuperuser
 # set up
 exit
 ```
+
+open http://172.18.0.4:3000/

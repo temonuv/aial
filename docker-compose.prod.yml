@@ -1,0 +1,16 @@
+services:
+  frontend:
+    # No source volume: Preserves baked .next
+    volumes:
+      - /app/node_modules
+    # Enforce prod
+    environment:
+      NODE_ENV: production
+    build:
+      args:
+        - NODE_ENV=production
+
+  # Backend prod (if ready)
+  backend:
+    environment:
+      DJANGO_ENV: production
