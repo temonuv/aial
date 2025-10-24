@@ -1,0 +1,21 @@
+services:
+  backend:
+    volumes:
+      # Add back source code for hot-reloading
+      - ./backend:/app
+    environment:
+      DJANGO_ENV: development
+    build:
+      args:
+        - NODE_ENV=development # In case your backend Dockerfile needs it
+
+  frontend:
+    volumes:
+      # Add back source code for hot-reloading
+      - ./frontend:/app
+      - /app/node_modules # Must be re-listed with the source mount
+    environment:
+      NODE_ENV: development
+    build:
+      args:
+        - NODE_ENV=development

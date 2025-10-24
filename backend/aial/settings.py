@@ -24,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-v=i8^%&j-b_-2=tr=sz8s)5bg1o=+za(=4zax5^%5e8vc^io$k'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DJANGO_DEBUG", True),
+DEBUG = os.getenv("DJANGO_DEBUG", "False")
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'dobrydealer.pl']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'dobrydealer.pl', 'backend']
 
 
 # Application definition
@@ -62,6 +62,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:3001",
     "https://dobrydealer.pl",
 ]
 
@@ -132,8 +133,6 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
@@ -155,3 +154,11 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_OBTAIN_SERIALIZER': 'users.serializers.EmailTokenObtainPairSerializer',
 }
+
+# Recognize HTTPS behind proxy (e.g., Nginx)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# This setting prevents Django from attempting to redirect URLs
+# that are missing a trailing slash, especially on POST requests
+# where redirects cause a runtime error.
+APPEND_SLASH = False

@@ -25,16 +25,22 @@ set up .env file in root direcotry
 
 set up .env file in frontend direcotry
 
-next:
+to run development env:
 ```
 docker compose down
-docker compose up --build
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
 
 # access backend on 
 http://localhost:8010/api/
 
 # server link
-https://dobrydealer.pl
+https://dobrydealer.pl/
+```
+
+to test production env:
+```
+docker compose down
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build
 ```
 
 ## create superuser

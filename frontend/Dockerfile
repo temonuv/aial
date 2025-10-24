@@ -1,5 +1,6 @@
 FROM node:20-alpine
 
+# This ARG will be used for the build/prune/start steps
 ARG NODE_ENV=development
 
 WORKDIR /app
@@ -7,8 +8,9 @@ WORKDIR /app
 # Copy package.json and package-lock.json (or yarn.lock)
 COPY package*.json ./
 
-# Always install ALL deps for build (TS needed for next.config.ts)
-RUN npm ci  # Full install: Prod + dev for build/transpile
+# Force NODE_ENV=development for this step ONLY
+# This ensures devDependencies (like typescript) are installed for the build.
+RUN NODE_ENV=development npm ci
 
 # Copy the rest of the code
 COPY . .

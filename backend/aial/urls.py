@@ -25,8 +25,10 @@ urlpatterns = [
     re_path(r'^api-info(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     re_path(r'^api-info/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     re_path(r'^api-doc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path("api/token/", EmailTokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    # path("api/token/", EmailTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    # path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    re_path(r"^api/token/?$", EmailTokenObtainPairView.as_view(), name="token_obtain_pair"),
+    re_path(r"^api/token/refresh/?$", TokenRefreshView.as_view(), name="token_refresh"),
 ]
 
 if settings.DEBUG:
